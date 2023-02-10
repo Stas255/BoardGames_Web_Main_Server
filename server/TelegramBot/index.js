@@ -2,6 +2,10 @@ const LOG = require('../classes/winston');
 
 const bot = require('./telegraf');
 
+require('./actions')(bot);
+require('./hears')(bot);
+require('./commands')(bot);
+
 bot.launch().catch(error => {
   if (error.code === 401) {
     bot.context = 99;
