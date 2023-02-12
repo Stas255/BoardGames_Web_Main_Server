@@ -1,0 +1,50 @@
+{
+    "tags": {
+        "allowUnknownTags": true,
+        "dictionaries": [
+            "jsdoc",
+            "closure"
+        ]
+    },
+    "source": {
+        "include": [
+            "./server",
+            "package.json"
+        ],
+        "includePattern": ".js$",
+        "excludePattern": "(node_modules/|docs)"
+    },
+    "plugins": [
+        "plugins/markdown"
+    ],
+    "templates": {
+        "cleverLinks": true,
+        "monospaceLinks": true,
+        "useLongnameInNav": false,
+        "showInheritedInNav": true,
+        "systemName": "TestSystem",
+        "navType": "inline",
+        "theme": "cosmo",
+        "linenums": "true",
+        "collapseSymbols": "true",
+        "inverseNav": "false",
+        "outputSourceFiles": "true",
+        "outputSourcePath": "true",
+        "syntaxTheme": "default",
+        "search": "true"
+    },
+    "opts": {
+        "destination": "./docs/",
+        "encoding": "utf8",
+        "private": true,
+        "recurse": true,
+        "template": "C:/Users/Stas/AppData/Roaming/npm/node_modules/docdash"
+    },
+    "docdash": {
+        "static": false,
+        "sort": true,
+        "search": true,
+        "collapse": true,
+        "wrap": true
+    }
+}
