@@ -1,7 +1,9 @@
 const migrate = require('migrate');
 const { mongoose, Schema } = require('mongoose');
+// eslint-disable-next-line n/no-path-concat
+require('dotenv').config({ path: __dirname + '/.env' });
 
-const url = 'mongodb+srv://stas_tol:P4mLH4MOnmgsyI34@serverlessinstance0.bl5br.mongodb.net/BoardGames_Debug?retryWrites=true&w=majority';
+const url = 'mongodb+srv://' + process.env.DB_USER + ':' + process.env.DB_PASSWORD + '@serverlessinstance0.bl5br.mongodb.net/BoardGames_Debug?retryWrites=true&w=majority';
 const Migrate = mongoose.model('migrate', new Schema({ lastRun: Object, migrations: Object }));
 
 class MongoDbStore {
