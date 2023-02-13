@@ -4,3 +4,5 @@ docs
 postman
 .eslintrc.js
 logs
+/server/mongoDB/albums-migrations/.migrate
+/server/mongoDB/albums-migrations/.env

@@ -1,5 +1,5 @@
 /**
- * @module server/mongoDB/models/user
+ * @module server/mongoDB/models
  * @name UserSchema
  */
 
