@@ -13,11 +13,13 @@ class MongoDbStore {
       await mongoose.connect(url);
       data = await Migrate.find();
       if (data.length !== 1) {
-        console.log('Cannot read migrations from database. If this is the first time you run migrations, then this is normal.');
+        // eslint-disable-next-line no-console
+        console.error('Cannot read migrations from database. If this is the first time you run migrations, then this is normal.');
         return fn(null, {});
       }
     } catch (err) {
-      console.log(err);
+      // eslint-disable-next-line no-console
+      console.error(err);
       throw err;
     } finally {
       mongoose.connection.close();
@@ -38,6 +40,7 @@ class MongoDbStore {
         }
       }, { upsert: true });
     } catch (err) {
+      // eslint-disable-next-line no-console
       console.log(err);
       throw err;
     } finally {
@@ -63,6 +66,7 @@ migrate.load({
     if (err2) {
       throw err2;
     }
+    // eslint-disable-next-line no-console
     console.log('Migrations successfully ran');
   });
 });
