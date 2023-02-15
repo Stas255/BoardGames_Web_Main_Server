@@ -1,6 +1,6 @@
 {
   "name": "boardgames_web_main_server",
-  "version": "0.5.0",
+  "version": "0.2.0",
   "description": "Main server for BoardGames site",
   "main": "index.js",
   "scripts": {

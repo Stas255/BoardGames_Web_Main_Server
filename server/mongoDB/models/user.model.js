@@ -1,15 +1,16 @@
 /**
- * @module server/mongoDB/models
- * @name UserSchema
+ * @module server/mongoDB/models/userModel
+ * @description This code is a function which defines and creates a schema for a User in the mongoose-role plugin. It creates a model with an 'id', 'name', and 'authToken' field, where the 'id' and 'name' fields are marked as 'required'. To provide authentication when users sign in, the 'authToken' field is optional but can be used. The plugin then adds roles ('public', 'user', 'admin') with corresponding access levels. Finally, it returns the User model.
  */
 
 module.exports = function (mongoose, Schema) {
   /**
-   *  @class UserSchema
+   * @class UserSchema
+   * @classDesc A class which defines a schema for a User. The User model includes an ID, a name, and an authentication token. The ID and name fields are both set as 'required', meaning they are required fields which must have a valid value. The authentication token, while not required, can be used to provide authentication when users sign in.
    */
   const UserSchema = new Schema({
     /**
-      *@memberOf UserSchema
+      *@memberof module:server/mongoDB/models/userModel~UserSchema
       *@name id
       *@type {Number}
       *@description Unique ID for the user
@@ -21,7 +22,7 @@ module.exports = function (mongoose, Schema) {
       required: true
     },
     /**
-      *@memberOf UserSchema
+      *@memberof module:server/mongoDB/models/userModel~UserSchema
       *@name name
       *@type {String}
       *@description Full name of the user
@@ -32,7 +33,7 @@ module.exports = function (mongoose, Schema) {
       required: true
     },
     /**
-      *@memberOf UserSchema
+      *@memberof module:server/mongoDB/models/userModel~UserSchema
       *@name authToken
       *@type {String}
       *@description Token User
@@ -42,12 +43,17 @@ module.exports = function (mongoose, Schema) {
       required: false
     }
   });
-
+  /**
+    *UserSchema Plugin with Mongoose-Role
+    *@function addRole
+    *@description This plugin enables a user schema to use roles as specified and limited by access levels. The roles provided are Public, User and Admin.
+    *@param {Object} roles - Roles that are available: 'public', 'user', 'admin'
+    *@param {Object} accessLevels - Object containing all of the roles and the corresponding access:
+    *public: Array - Contains all three roles
+    *user: Array - Contains only the user role
+    *admin: Array - Contains only the admin role
+    */
   UserSchema.plugin(require('mongoose-role'), {
-    /**
-      * @memberOf UserSchema
-      * @namespace roles
-      */
     roles: ['public', 'user', 'admin'],
     accessLevels: {
       public: ['public', 'user', 'admin'],
@@ -57,5 +63,10 @@ module.exports = function (mongoose, Schema) {
   });
 
   const User = mongoose.model('user', UserSchema);
+  /**
+  @param {*} return
+  @description Returns the User model
+  @returns User
+  */
   return User;
 };

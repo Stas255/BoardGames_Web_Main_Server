@@ -25,13 +25,13 @@
         "systemName": "TestSystem",
         "navType": "inline",
         "theme": "cosmo",
-        "linenums": "true",
-        "collapseSymbols": "true",
-        "inverseNav": "false",
-        "outputSourceFiles": "true",
-        "outputSourcePath": "true",
+        "linenums": true,
+        "collapseSymbols": true,
+        "inverseNav": false,
+        "outputSourceFiles": true,
+        "outputSourcePath": true,
         "syntaxTheme": "default",
-        "search": "true"
+        "search": true
     },
     "opts": {
         "destination": "./docs/",
