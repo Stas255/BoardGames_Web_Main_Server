@@ -2,9 +2,13 @@ const router = require('express').Router();
 
 const { auth_controller } = require('../controllers');
 
-const { verifyAccessToken } = require('../middleware/authJwt');
+const { verifyAccessToken, parseLoginId } = require('../middleware/authJwt');
 
-router.post('/signin', auth_controller.signin);
+router.post('/signin',
+  [
+    parseLoginId
+  ],
+  auth_controller.signin);
 
 router.post('/signout',
   [

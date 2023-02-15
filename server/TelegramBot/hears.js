@@ -1,7 +1,10 @@
+const crypto = require('crypto');
+
 const { User } = require('../mongoDB/models');
+
 module.exports = function (bot) {
   bot.hears('Login', (ctx) => {
-    User.findOne({ id: ctx.from.id }).then(user => {
+    User.findOne({ id: ctx.from.id }).then(async user => {
       if (user == null) {
         ctx.reply('You are a new user. Do you want to register?', {
           reply_markup: {
@@ -22,7 +25,10 @@ module.exports = function (bot) {
           }, 10000);
         });
       } else {
-        ctx.reply('http_site');
+        const id = crypto.randomBytes(51).toString('hex');
+        user.authToken = id;
+        await user.save();
+        ctx.reply(process.env.CHILD_HTTP + 'signin?id=' + id);
       }
     });
     setTimeout(function () {

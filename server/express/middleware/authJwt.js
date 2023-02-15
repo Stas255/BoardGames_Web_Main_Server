@@ -22,6 +22,23 @@ const verifyAccessToken = (request, response, next) => {
   }
 };
 
+const parseLoginId = (request, response, next) => {
+  const id = request.query.id;
+  User.findOne(
+    {
+      authToken: id
+    }
+  ).then(user => {
+    if (user) {
+      request.body.telegramId = user.id;
+      return next();
+    }
+    return response.status(403).send(JSON.stringify({ message: 'Cannot find user' }));
+  }).catch(err => {
+    return response.status(500).send(JSON.stringify(err));
+  });
+};
+
 function hasAccess(accessLevel) {
   return function (request, response, next) {
     User.findOne(
@@ -41,5 +58,6 @@ function hasAccess(accessLevel) {
 
 module.exports = {
   verifyAccessToken,
-  hasAccess
+  hasAccess,
+  parseLoginId
 };
