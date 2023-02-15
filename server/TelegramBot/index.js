@@ -8,7 +8,7 @@ const LOG = require('../classes/winston');
 
 /**
 
-@file This file imports all functions from ./actions, ./hears and ./commands
+@desc This file imports all functions from ./actions, ./hears and ./commands
 */
 const bot = require('./telegraf');
 
