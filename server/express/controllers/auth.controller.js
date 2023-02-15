@@ -18,9 +18,7 @@ async function responseToken(user, response) {
   const token = jwt.sign({ id: user.id }, process.env.SECRET_KEY, {
     expiresIn: 86400 // 24 hours
   });
-  user.authToken = token;
   try {
-    await user.save();
     response.send({ AuthToken: token });
   } catch (err) {
     LOG.error(JSON.stringify(err));

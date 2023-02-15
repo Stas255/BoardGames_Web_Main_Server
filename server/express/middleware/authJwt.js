@@ -28,9 +28,11 @@ const parseLoginId = (request, response, next) => {
     {
       authToken: id
     }
-  ).then(user => {
+  ).then(async user => {
     if (user) {
       request.body.telegramId = user.id;
+      user.authToken = null;
+      await user.save();
       return next();
     }
     return response.status(403).send(JSON.stringify({ message: 'Cannot find user' }));
