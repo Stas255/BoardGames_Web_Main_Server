@@ -3,6 +3,7 @@
  *
  * @module server/classes/winston
  * @requires winston
+ * @exports module:server/classes/winston
  */
 const winston = require('winston');
 
@@ -28,8 +29,6 @@ const logger = winston.createLogger({
 
 /**
  *  @classDesc Provides easy access to the system bus and provides some helper methods for doing so
- *  @exports server/classes/winston
- *  @mixin
  */
 class LOG {
   /**

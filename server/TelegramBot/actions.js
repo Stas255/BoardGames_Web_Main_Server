@@ -1,8 +1,19 @@
+/**
+ * @module server/TelegramBot/actions
+ * @requires server/classes/winston
+ * @requires server/mongoDB/models
+ * @desc Contains all bot actions
+ */
 const { User } = require('../mongoDB/models');
 
 const LOG = require('../classes/winston');
 
 module.exports = function (bot) {
+  /**
+  @name actionRegister
+  @desc Registers a user in the DB
+  @param {object} ctx - The context of the telegram message
+  */
   bot.action('Register', async (ctx) => {
     User.findOne({ id: ctx.from.id }).then(user => {
       if (user == null) {
