@@ -58,10 +58,10 @@ module.exports = function (bot) {
         await user.save();
         const url = process.env.CLIENT_HTTP + '/token?id=' + id;
         const text = '<a href="' + url + '">Вхід в акаунт</a>';
-        if (process.env.CLIENT_HTTP.includes('http://localhost')) {
+        if (process.env.CLIENT_HTTP.includes('http://localhost') || process.env.CLIENT_HTTP.includes('http://board-games-web-client-server:88')) {
           ctx.sendMessage(url);
         } else {
-          ctx.sendMessage(text, { parse_mode: 'MarkdownV2' });
+          ctx.sendMessage(text, { parse_mode: 'HTML' });
         }
       }
     });
