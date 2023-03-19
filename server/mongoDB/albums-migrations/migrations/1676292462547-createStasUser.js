@@ -1,6 +1,6 @@
 'use strict';
 
-const { User, connect } = require('../db');
+const { User, connect, dissconect } = require('../db');
 
 module.exports.up = async function (next) {
   try {
@@ -16,6 +16,8 @@ module.exports.up = async function (next) {
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error({ error: error.message || error });
+  } finally {
+    await dissconect();
   }
 };
 
@@ -27,5 +29,7 @@ module.exports.down = async function (next) {
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error({ error: error.message || error });
+  } finally {
+    await dissconect();
   }
 };

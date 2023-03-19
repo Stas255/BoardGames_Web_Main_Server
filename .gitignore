@@ -6,3 +6,4 @@ logs
 /server/mongoDB/albums-migrations/.migrate
 /server/mongoDB/albums-migrations/.env
 .env_prod
+.env_dev
