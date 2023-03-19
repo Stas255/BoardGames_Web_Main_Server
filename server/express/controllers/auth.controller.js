@@ -22,7 +22,10 @@ Signs in a user.
 const signin = (request, response) => {
   User.findOne({ id: request.body.telegramId }).then(async user => {
     if (!user) { return response.status(500).send('User not found'); }
-    await responseToken(user, response);
+    const unicToken = (Math.random() + 1).toString(36).substring(5);
+    user.tokenId = unicToken;
+    await user.save();
+    await responseToken(user, response, unicToken);
   }).catch(err => {
     LOG.error(JSON.stringify(err));
     return response.status(500).send(JSON.stringify(err));
@@ -35,12 +38,17 @@ Sends response token.
 @param {Object} response - Response object
 @return {void}
 */
-async function responseToken(user, response) {
-  const token = jwt.sign({ id: user.id }, process.env.SECRET_KEY, {
+async function responseToken(user, response, unicToken) {
+  const token = jwt.sign({ id: user.id, tokenId: unicToken }, process.env.SECRET_KEY, {
     expiresIn: 86400 // 24 hours
   });
   try {
-    response.send({ AuthToken: token });
+    response.send({
+      accessToken: token,
+      user: {
+        full_name: user.name
+      }
+    });
   } catch (err) {
     LOG.error(JSON.stringify(err));
   }

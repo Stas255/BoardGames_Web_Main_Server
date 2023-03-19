@@ -40,7 +40,7 @@ router.post('/isUser',
 * @memberof module:server/express/routes/userRoutes~userRouter
 * @param {string} path - Express path
 * @param {module:server/middleware/authJwt~verifyAccessToken} verifyAccessToken - verify Token
-* @param {module:server/middleware/authJwt~hasAccess} hasAccessUser - check does user have role admin
+* @param {module:server/middleware/authJwt~hasAccess} hasAccessAdmin - check does user have role admin
 * @param {module:server/controllers/userController~isAdmin} isAdmin - response true is user has role admin
 */
 router.post('/isAdmin',
@@ -49,6 +49,22 @@ router.post('/isAdmin',
     hasAccess('admin')
   ],
   user_controller.isAdmin);
+
+/**
+* POST Route to signin into the API
+* @name post/isAdmin
+* @memberof module:server/express/routes/userRoutes~userRouter
+* @param {string} path - Express path
+* @param {module:server/middleware/authJwt~verifyAccessToken} verifyAccessToken - verify Token
+* @param {module:server/middleware/authJwt~hasAccess} hasAccessUser - check does user have role user
+* @param {module:server/controllers/userController~isAdmin} isAdmin - response true is user has role admin
+*/
+router.post('/infor',
+  [
+    verifyAccessToken,
+    hasAccess('user')
+  ],
+  user_controller.infor);
 
 /**
  * exports:router

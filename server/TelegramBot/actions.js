@@ -18,7 +18,7 @@ module.exports = function (bot) {
     User.findOne({ id: ctx.from.id }).then(user => {
       if (user == null) {
         const newUser = new User({
-          id: ctx.from.id + 1,
+          id: ctx.from.id,
           name: ctx.from.first_name + ' ' + ctx.from.last_name,
           role: 'user'
         });

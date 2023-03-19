@@ -1,6 +1,8 @@
 /**
  * @module server/express
  * @requires express
+ * @requires body-parser
+ * @requires cors
  * @requires server/classes/winston
  * @requires server/express/routes/authRoutes
  * @requires server/express/routes/userRoutes
@@ -8,6 +10,10 @@
  * @description This script creates a child server on the given port
  */
 const express = require('express');
+
+const bodyParser = require('body-parser');
+
+const cors = require('cors');
 
 const LOG = require('../classes/winston');
 
@@ -17,10 +23,21 @@ const LOG = require('../classes/winston');
  */
 const app = express();
 
+const corsOptions = {
+  origin: process.env.CLIENT_HTTP,
+  credentials: true,
+  optionSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
+
 /**
-Registers all the middleware
-*/
-app.use(express.json());
+ * parse application/x-www-form-urlencoded
+ */
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// parse application/json
+app.use(bodyParser.json());
 
 const auth_routes = require('./routes/auth.routes');
 

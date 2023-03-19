@@ -41,6 +41,16 @@ module.exports = function (mongoose, Schema) {
     authToken: {
       type: String,
       required: false
+    },
+    /**
+      *@memberof module:server/mongoDB/models/userModel~UserSchema
+      *@name tokenId
+      *@type {String}
+      *@description Unic token id
+      */
+    tokenId: {
+      type: String,
+      required: false
     }
   });
   /**

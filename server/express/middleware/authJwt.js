@@ -22,12 +22,15 @@ const verifyAccessToken = (request, response, next) => {
     const bearer = bearerHeader.split(' ');
     const bearerToken = bearer[1];
     jwt.verify(bearerToken, process.env.SECRET_KEY, (err, decoded) => {
-      if (err instanceof jwt.JsonWebTokenError) {
-        return response.status(401).send(JSON.stringify({ message: 'Token is incorrect' }));
+      if (err instanceof jwt.TokenExpiredError) {
+        return response.status(401).send(JSON.stringify({ message: 'Time out', returnHome: true }));
+      } else if (err instanceof jwt.JsonWebTokenError) {
+        return response.status(401).send(JSON.stringify({ message: 'Token is incorrect', returnHome: true }));
       } else if (err) {
         return response.status(401).send(JSON.stringify({ message: 'Got error during tokenverify ' }));
       }
       request.body.telegramId = decoded.id;
+      request.body.tokenId = decoded.tokenId;
       next();
     });
   } else {
@@ -43,10 +46,10 @@ Parses a login id and attaches it to the request object
 @returns {undefined}
 */
 const parseLoginId = (request, response, next) => {
-  const id = request.query.id;
+  const token = request.body.token;
   User.findOne(
     {
-      authToken: id
+      authToken: token
     }
   ).then(async user => {
     if (user) {
@@ -74,7 +77,14 @@ function hasAccess(accessLevel) {
       {
         id: request.body.telegramId
       }
-    ).then(user => {
+    ).then(async user => {
+      if (!user.tokenId || !request.body.tokenId === user.tokenId) {
+        if (user.tokenId) {
+          user.tokenId = null;
+          await user.save();
+        }
+        return response.status(401).send(JSON.stringify({ message: 'Token is incorrect', returnHome: true }));
+      }
       if (user && user.hasAccess(accessLevel)) {
         return next();
       }
