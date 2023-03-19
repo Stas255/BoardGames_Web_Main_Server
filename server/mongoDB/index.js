@@ -41,7 +41,7 @@ mongoose.connection.on('error', function (err) {
 @description Get the credentials from .env file
 @const
 */
-const uri = 'mongodb+srv://' + process.env.DB_USER + ':' + process.env.DB_PASSWORD + '@serverlessinstance0.bl5br.mongodb.net/BoardGames_Debug?retryWrites=true&w=majority';
+const uri = 'mongodb+srv://' + process.env.DB_USER + ':' + process.env.DB_PASSWORD + '@serverlessinstance0.bl5br.mongodb.net/' + process.env.DB_NAME + '?retryWrites=true&w=majority';
 
 /**
 @description Connect with the mongodb using provided URI.
