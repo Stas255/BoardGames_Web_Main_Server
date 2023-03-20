@@ -4,7 +4,7 @@
  * @requires server/mongoDB/models
  * @desc Contains all bot hears
  */
-const crypto = require('crypto');
+const crypto = require('node:crypto');
 
 const { User } = require('../mongoDB/models');
 
