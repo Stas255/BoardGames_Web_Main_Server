@@ -46,6 +46,10 @@ const user_routes = require('./routes/user.routes');
 app.use('/auth', auth_routes);
 app.use('/user', user_routes);
 
+app.get('/', (req, res) => {
+  res.send('Main server is running.');
+});
+
 /**
  * Create child server on given port
  * @param {number} process.env.CHILD_PORT the port to listen on

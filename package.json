@@ -6,6 +6,7 @@
   "scripts": {
     "migarte": "../../../node_modules/.bin/migrate up --store=my-migration-store",
     "test": "nodemon ./server/index.js",
+    "mainServer": "nodemon index.js",
     "lint": "eslint .",
     "generate-docs": "jsdoc -c .jsdoc.json -t C:/Users/Stas/AppData/Roaming/npm/node_modules/ink-docstrap/template --verbose"
   },
