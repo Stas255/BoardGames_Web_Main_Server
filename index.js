@@ -1,6 +1,6 @@
 const { spawn } = require('child_process');
 
-const secondProject = spawn('node', ['./server/index2.js']);
+const secondProject = spawn('node', ['./server/index.js']);
 
 secondProject.stdout.on('data', (data) => {
   console.log(`stdout: ${data}`);
