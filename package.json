@@ -18,7 +18,7 @@
     "jsonwebtoken": "^9.0.0",
     "migrate": "^1.8.0",
     "mongodb": "^5.0.1",
-    "mongoose": "^6.9.1",
+    "mongoose": "^6.11.3",
     "mongoose-role": "^3.0.5",
     "my-migration-store": "file:./server/mongoDB/albums-migrations/package",
     "nodemon": "^2.0.20",
